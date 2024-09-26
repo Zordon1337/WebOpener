@@ -41,13 +41,21 @@ async function OpenCase(json)
 
 async function Keep(skin)
 {
-    let t = await import("../Player")
+    let t = await import("../Player.js")
     t.Player.addSkin(skin)
+
+    document.getElementById("CaseOpenPreview").style.display = 'none'
+    document.getElementById("CaseOpenResult").style.display = 'none'
+    document.getElementById("CasesList").style.display = ''
 }
 
 async function Sell(skin)
 {
     let t = await import("../Player.js")
     t.Player.addMoney(parseCurrency(await getItemPrice(skin)))
+
+    document.getElementById("CaseOpenPreview").style.display = 'none'
+    document.getElementById("CaseOpenResult").style.display = 'none'
+    document.getElementById("CasesList").style.display = ''
     //console.log(t.Player.getMoney())
 }
