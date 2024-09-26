@@ -38,7 +38,19 @@ async function OpenCase(json)
     document.getElementById("CaseResultKeep").onclick = () => Keep(item.textContent)
     document.getElementById("CaseResultSell").onclick = () => Sell(item.textContent)
 }
-
+async function Render()
+{
+    let t = await import("../Player.js")
+    const skins = t.Player.getSkins()
+    var skindiv = document.getElementById("Skins")
+    skindiv.innerHTML = "<h1>Your Skins:</h1>"
+    for(let i = 0; i < skins.length; i++)
+    {
+        var test = document.createElement("p")
+        test.textContent = skins[i]
+        skindiv.appendChild(test)
+    }
+}
 async function Keep(skin)
 {
     let t = await import("../Player.js")
@@ -47,6 +59,9 @@ async function Keep(skin)
     document.getElementById("CaseOpenPreview").style.display = 'none'
     document.getElementById("CaseOpenResult").style.display = 'none'
     document.getElementById("CasesList").style.display = ''
+
+    document.getElementById("Skins").style.display = ''
+    Render();
 }
 
 async function Sell(skin)
@@ -57,5 +72,7 @@ async function Sell(skin)
     document.getElementById("CaseOpenPreview").style.display = 'none'
     document.getElementById("CaseOpenResult").style.display = 'none'
     document.getElementById("CasesList").style.display = ''
+
+    document.getElementById("Skins").style.display = ''
     //console.log(t.Player.getMoney())
 }
