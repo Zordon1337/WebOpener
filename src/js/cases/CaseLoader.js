@@ -17,6 +17,21 @@ async function GetHTML()
     itemframe.appendChild(title);
     return itemframe
 }
-async function OpenCase(Items)
+async function OpenCase(json)
 {
+    document.getElementById("CasePreview").style.display = 'none'
+    document.getElementById("CaseOpenPreview").style.display = ''
+    document.getElementById("CaseImage").src = json.img;
+    var item = document.getElementById("CaseItem")
+    for(let i = 0; i < 15; i++)
+    {
+
+        document.getElementById("CaseItemTitle").textContent = json.name; // duplication but i have no clue how to fix it properly
+        item.textContent = json.skins[Rand(json.skins.length)]
+        await sleep(500);
+    }
+    document.getElementById("CaseOpenPreview").style.display = 'none'
+    document.getElementById("CaseOpenResult").style.display = ''
+    document.getElementById("CaseResultTitle").textContent = `You dropped ${item.textContent} for ${await getItemPrice(item.textContent)}`
+    document.getElementById("CaseResultImage").src = `https://api.steamapis.com/image/item/730/${item.textContent}`
 }
