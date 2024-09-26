@@ -17,3 +17,6 @@ async function GetHTML()
     itemframe.appendChild(title);
     return itemframe
 }
+async function OpenCase(Items)
+{
+}
