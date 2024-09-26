@@ -17,3 +17,10 @@ function Rand(max)
 {
     return Math.floor(Math.random() * max);
 }
+function parseCurrency(currencyString) {
+    const cleanedString = currencyString
+        .replace(/[^0-9,]/g, '') 
+        .replace(',', '.');
+    const value = parseFloat(cleanedString);
+    return Math.floor(value);
+}
