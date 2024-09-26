@@ -13,7 +13,6 @@ async function GetHTML()
     title.textContent = c.name;
     var image = document.createElement("img");
     image.src = c.img;
-
     itemframe.appendChild(image);
     itemframe.appendChild(title);
     return itemframe

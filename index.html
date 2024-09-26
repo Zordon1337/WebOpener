@@ -13,11 +13,14 @@
     <script type="text/javascript" src="src/js/cases/CaseLoader.js"></script>
 </head>
 <body>
+    <div id="CasesList">
+        <!-- it is managed by js anyways-->
+    </div>
     <script>
         async function LoadPage()
         {
             var htm = await GetHTML()
-            document.getElementsByTagName("body")[0].appendChild(htm)
+            document.getElementById("CasesList").appendChild(htm)
         }
         LoadPage()
     </script>
