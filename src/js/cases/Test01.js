@@ -11,6 +11,7 @@ export function OpenMe() {
     document.getElementById("CaseName").textContent = Name;
     document.getElementById("CaseImage").src = image;
     var cc = document.getElementById("CaseContents")
+    cc.innerHTML = ""
     for(let i = 0; i <= Skins.length; i++)
     {
         var elm = document.createElement("p")

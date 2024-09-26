@@ -24,7 +24,7 @@ async function OpenCase(json)
     document.getElementById("CaseOpenPreview").style.display = ''
     document.getElementById("CaseImage").src = json.img;
     var item = document.getElementById("CaseItem")
-    for(let i = 0; i < 15; i++)
+    for(let i = 0; i < 50; i++)
     {
 
         document.getElementById("CaseItemTitle").textContent = json.name; // duplication but i have no clue how to fix it properly
