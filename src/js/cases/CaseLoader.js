@@ -34,4 +34,16 @@ async function OpenCase(json)
     document.getElementById("CaseOpenResult").style.display = ''
     document.getElementById("CaseResultTitle").textContent = `You dropped ${item.textContent} for ${await getItemPrice(item.textContent)}`
     document.getElementById("CaseResultImage").src = `https://api.steamapis.com/image/item/730/${item.textContent}`
+    document.getElementById("CaseResultKeep").onclick = () => Keep()
+    document.getElementById("CaseResultSell").onclick = () => Sell()
+}
+
+function Keep(skin)
+{
+
+}
+
+function Sell(skin)
+{
+    
 }
