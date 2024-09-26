@@ -1,4 +1,4 @@
-<!-- Case Opener in Web Browser, idk why but i made it to play it in my school -->
+<!-- Case Opener in Web Browser, idk why but I made it to play it in my school -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,8 +8,18 @@
     <style>
         @import url(src/css/style.css);
     </style>
+    <script type="text/javascript" src="src/js/utils.js"></script>
+    <script type="text/javascript" src="src/js/main.js"></script>
+    <script type="text/javascript" src="src/js/cases/CaseLoader.js"></script>
 </head>
 <body>
-    
+    <script>
+        async function LoadPage()
+        {
+            var htm = await GetHTML()
+            document.getElementsByTagName("body")[0].appendChild(htm)
+        }
+        LoadPage()
+    </script>
 </body>
 </html>
