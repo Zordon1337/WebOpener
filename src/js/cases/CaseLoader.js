@@ -30,6 +30,8 @@ async function GetHTML()
 }
 async function OpenCase(json)
 {
+    document.getElementById("CaseResultImage").src = ``
+    document.getElementById("CaseResultTitle").textContent = `Loading skin...`
     document.getElementById("CasePreview").style.display = 'none'
     document.getElementById("CaseOpenPreview").style.display = ''
     document.getElementById("CaseImage").src = json.img;
