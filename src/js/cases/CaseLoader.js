@@ -70,7 +70,7 @@ async function Render()
     let t = await import("../Player.js")
     const skins = t.Player.getSkins()
     var skindiv = document.getElementById("Skins")
-    skindiv.innerHTML = "<h1>Your Skins:</h1>"
+    skindiv.innerHTML = `<h1>Your Skins(${await getInventoryPrice(t.Player.PlayerSkins)} ZŁ):</h1>`
     for(let i = 0; i < skins.length; i++)
     {
         var test = document.createElement("p")

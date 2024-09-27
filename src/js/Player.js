@@ -13,7 +13,7 @@ export class Player {
     static getMoney() {
         return this.PlayerMoney;
     }
-
+    
     static getSkins() {
         return this.PlayerSkins;
     }
