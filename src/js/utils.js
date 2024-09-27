@@ -32,11 +32,9 @@ function parseCurrency(currencyString) {
         console.error(`Expected a string but received: ${currencyString}`);
         return 0; 
     }
-
-    // Remove non-numeric characters except for the decimal point
     const cleanedString = currencyString
-        .replace(/[^0-9.,]/g, '')  // This will remove $ signs and other non-numeric characters
-        .replace(',', '.');        // Replace comma with dot for decimal places
+        .replace(/[^0-9.,]/g, '')
+        .replace(',', '.');
 
     const value = parseFloat(cleanedString);
 
@@ -44,18 +42,25 @@ function parseCurrency(currencyString) {
         console.error(`Could not parse the value: ${currencyString}`);
         return 0;
     }
-
-    return value;
+    return value; 
 }
 
 
 async function getInventoryPrice(PlayerSkins) {
     let totalValue = 0;
 
+    console.log('Player Skins:', PlayerSkins);
+
     for (let i = 0; i < PlayerSkins.length; i++) {
         const price = await getItemPrice(PlayerSkins[i]);
-        totalValue += parseCurrency(price);
-    }
-    return (totalValue).toFixed(2); // this piece of shit makes me sad and pissed off at the same time, including parseCurrency
-}
+        const parsedPrice = parseCurrency(price);
 
+        console.log(`Skin: ${PlayerSkins[i]}, Raw Price: ${price}, Parsed Price: ${parsedPrice}`);
+        
+        totalValue += parsedPrice; // why does this piece of shit adds sometimes +1 instead of 1k
+    }
+
+    console.log(`Total Value before formatting: ${totalValue}`);
+
+    return totalValue.toFixed(2); 
+}
