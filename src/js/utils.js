@@ -13,7 +13,7 @@ async function getItemPrice(item) {
         return priceCache[item];
     }
 
-    const data = await getUsingProxy(`https://steamcommunity.com/market/priceoverview/?currency=6&country=us&appid=730&market_hash_name=${item}&format=json`);
+    const data = await getUsingProxy(`https://steamcommunity.com/market/priceoverview/?currency=1&country=us&appid=730&market_hash_name=${item}&format=json`);
     const res = JSON.parse(data.contents);
     const price = res.lowest_price;
 
