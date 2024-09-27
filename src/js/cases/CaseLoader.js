@@ -74,7 +74,7 @@ async function Render()
     for(let i = 0; i < skins.length; i++)
     {
         var test = document.createElement("p")
-        test.textContent = skins[i]
+        test.textContent = `${skins[i]} (${await getItemPrice(skins[i])})`
         skindiv.appendChild(test)
     }
 }

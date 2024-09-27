@@ -4,6 +4,9 @@ body {
     font-family: 'Courier New', Courier, monospace;
     text-align: center;
 }
+.CasesList {
+    margin: 5px;
+}
 .case {
     border: 2px solid white;
     width: 168px;
