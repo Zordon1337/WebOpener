@@ -33,18 +33,29 @@ function parseCurrency(currencyString) {
         return 0; 
     }
 
+    // Remove non-numeric characters except for the decimal point
     const cleanedString = currencyString
-        .replace(/[^0-9,]/g, '') 
-        .replace(',', '.');
+        .replace(/[^0-9.,]/g, '')  // This will remove $ signs and other non-numeric characters
+        .replace(',', '.');        // Replace comma with dot for decimal places
+
     const value = parseFloat(cleanedString);
-    return Math.floor(value);
+
+    if (isNaN(value)) {
+        console.error(`Could not parse the value: ${currencyString}`);
+        return 0;
+    }
+
+    return value;
 }
 
 
-async function getInventoryPrice(PlayerSkins)
-{
-    let value = 0.0;
-    for(let i = 0; i < PlayerSkins.length; i++)
-        value += parseCurrency(await getItemPrice(PlayerSkins[i]))
-    return value
+async function getInventoryPrice(PlayerSkins) {
+    let totalValue = 0;
+
+    for (let i = 0; i < PlayerSkins.length; i++) {
+        const price = await getItemPrice(PlayerSkins[i]);
+        totalValue += parseCurrency(price);
+    }
+    return (totalValue).toFixed(2); // this piece of shit makes me sad and pissed off at the same time, including parseCurrency
 }
+
