@@ -1,22 +1,32 @@
 
-
+const casestoload = [
+    "Test01",
+    "Test02"
+]
 async function LoadCase(name) {
     const t = await import(`./${name}.js`);
     return t.getJson(); 
 }
 async function GetHTML()
 {
-    var itemframe = document.createElement("div")
-    itemframe.classList.add("case")
-    var title = document.createElement("p")
-    const c = await LoadCase("Test01");
-    itemframe.onclick = c.OpenMe
-    title.textContent = c.name;
-    var image = document.createElement("img");
-    image.src = c.img;
-    itemframe.appendChild(image);
-    itemframe.appendChild(title);
-    return itemframe
+    for(let i = 0; i <= casestoload.length; i++)
+    {
+        var itemframe = document.createElement("div")
+        itemframe.classList.add("case")
+        var title = document.createElement("p")
+        const c = await LoadCase(casestoload[i]);
+        itemframe.onclick = c.OpenMe
+        title.textContent = c.name;
+        var image = document.createElement("img");
+        image.src = c.img;
+        itemframe.appendChild(image);
+        itemframe.appendChild(title);
+        var br = document.createElement("br")
+        var br2 = document.createElement("br")
+        itemframe.appendChild(br)
+        itemframe.appendChild(br2)
+        document.getElementById("CasesList").appendChild(itemframe)
+    }
 }
 async function OpenCase(json)
 {
@@ -24,7 +34,7 @@ async function OpenCase(json)
     document.getElementById("CaseOpenPreview").style.display = ''
     document.getElementById("CaseImage").src = json.img;
     var item = document.getElementById("CaseItem")
-    for(let i = 0; i < 50; i++)
+    for(let i = 0; i < 25; i++)
     {
 
         document.getElementById("CaseItemTitle").textContent = json.name; // duplication but i have no clue how to fix it properly

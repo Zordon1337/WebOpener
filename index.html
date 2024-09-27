@@ -29,7 +29,7 @@
     </div>
     <div id="CaseOpenResult" style="display:none;text-align: center;">
         <img width="256" height="256" id="CaseResultImage"/>
-        <h1 id="CaseResultTitle">Test</h1>
+        <h1 id="CaseResultTitle">Loading Skin Name</h1>
         <button id="CaseResultKeep" style="background-color: green;color:white">Keep</button>
         <button id="CaseResultSell" style="background-color: red;color:white">Sell</button>
         <br/>
@@ -44,8 +44,7 @@
     <script>
         async function LoadPage()
         {
-            var htm = await GetHTML()
-            document.getElementById("CasesList").appendChild(htm)
+            GetHTML()
         }
         LoadPage()
     </script>
