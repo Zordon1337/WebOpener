@@ -1,3 +1,4 @@
+const priceCache = {};
 
 const casestoload = [
     "Test01",
@@ -5,7 +6,17 @@ const casestoload = [
 ]
 async function LoadCase(name) {
     const t = await import(`./${name}.js`);
-    return t.getJson(); 
+    const caseData = await t.getJson();
+
+    // Cache skin prices after init, to avoid delayed skin load
+    for (let skin of caseData.skins) {
+        if (!priceCache[skin]) {
+            const price = await getItemPrice(skin);
+            priceCache[skin] = price;
+        }
+    }
+
+    return caseData;
 }
 async function GetHTML()
 {
@@ -28,28 +39,32 @@ async function GetHTML()
         document.getElementById("CasesList").appendChild(itemframe)
     }
 }
-async function OpenCase(json)
-{
-    document.getElementById("CaseResultImage").src = ``
-    document.getElementById("CaseResultTitle").textContent = `Loading skin...`
-    document.getElementById("CasePreview").style.display = 'none'
-    document.getElementById("CaseOpenPreview").style.display = ''
-    document.getElementById("CaseImage").src = json.img;
-    var item = document.getElementById("CaseItem")
-    for(let i = 0; i < 25; i++)
-    {
+async function OpenCase(json) {
+    document.getElementById("CaseResultImage").src = ``;
+    document.getElementById("CaseResultTitle").textContent = `Loading skin...`;
+    document.getElementById("CasePreview").style.display = 'none';
+    document.getElementById("CaseOpenPreview").style.display = '';
 
-        document.getElementById("CaseItemTitle").textContent = json.name; // duplication but i have no clue how to fix it properly
-        item.textContent = json.skins[Rand(json.skins.length)]
+    document.getElementById("CaseImage").src = json.img;
+    var item = document.getElementById("CaseItem");
+    for (let i = 0; i < 25; i++) {
+        document.getElementById("CaseItemTitle").textContent = json.name;
+        const selectedSkin = json.skins[Rand(json.skins.length)];
+        item.textContent = selectedSkin;
         await sleep(100);
     }
-    document.getElementById("CaseOpenPreview").style.display = 'none'
-    document.getElementById("CaseOpenResult").style.display = ''
-    document.getElementById("CaseResultTitle").textContent = `You dropped ${item.textContent} for ${await getItemPrice(item.textContent)}`
-    document.getElementById("CaseResultImage").src = `https://api.steamapis.com/image/item/730/${item.textContent}`
-    document.getElementById("CaseResultKeep").onclick = () => Keep(item.textContent)
-    document.getElementById("CaseResultSell").onclick = () => Sell(item.textContent)
+
+    document.getElementById("CaseOpenPreview").style.display = 'none';
+    document.getElementById("CaseOpenResult").style.display = '';
+
+    const price = priceCache[item.textContent];
+    document.getElementById("CaseResultTitle").textContent = `You dropped ${item.textContent} for ${price}`;
+    document.getElementById("CaseResultImage").src = `https://api.steamapis.com/image/item/730/${item.textContent}`;
+
+    document.getElementById("CaseResultKeep").onclick = () => Keep(item.textContent);
+    document.getElementById("CaseResultSell").onclick = () => Sell(item.textContent);
 }
+
 async function Render()
 {
     let t = await import("../Player.js")
